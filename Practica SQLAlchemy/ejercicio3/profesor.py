@@ -1,0 +1,17 @@
+from sqlalchemy import Column, Integer, String, DateTime, ForeignKey
+from sqlalchemy.orm import relationship
+
+from database import Base
+
+
+class Profesor(Base):
+    __tablename__ = "profesores"
+
+    id = Column(Integer, primary_key=True)
+    nombre = Column(String, nullable=False)
+    email = Column(String, nullable=False)
+    fecha_ingreso = Column(DateTime, nullable=False)
+
+    departamento_id = Column(Integer, ForeignKey("departamentos.id"))
+
+    departamento = relationship("Departamento", back_populates="profesores")
